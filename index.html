@@ -26,11 +26,27 @@
       cursor: pointer;
     }
     .hero-background {
+      position: relative;
       background: url(./imgs/hero_section.jfif);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      /* remove any text color styles here if you want consistent styling */
     }
+
+    .hero-background::before {
+      content: "";
+      position: absolute;
+      inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0; */
+      background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+      z-index: 0;
+    }
+
+    .hero-background > * {
+      position: relative;
+      z-index: 1; /* make sure text is above the overlay */
+    }
+    
   </style>
 </head>
 <body class="bg-white">
@@ -42,8 +58,8 @@
 
   <!-- Hero Section -->
   <section class="text-center py-16 px-4 hero-background">
-    <h1 class="text-3xl font-bold text-[#1F2A44] mb-4">Need a laptop without the stress?</h1>
-    <p class="mb-6 text-lg">We test it. We prepare it. We deliver it ready. You relax—we handle the rest.</p>
+    <h1 class="text-3xl font-bold text-[#1F2A44] mb-4" style="color: white;">Need a laptop without the stress?</h1>
+    <p class="mb-6 text-lg" style="color: white;">We test it. We prepare it. We deliver it ready. You relax—we handle the rest.</p>
     <a href="https://wa.me/96181323037?text=Hi%2C%20I%20want%20to%20see%20what%20laptop%20fits%20me%20best." class="btn-primary">Let’s Find Yours</a>
   </section>
 
@@ -215,16 +231,44 @@
   </section>
 
   <script>
+    const images = [];
+    const videoUrls = [];
+
     window.onload = async function () {
     try {
+        const url1 = 'https://docs.google.com/spreadsheets/d/1IpsAaBerGju_XdY83AGurxDnw4gCNYLFoFFv44v6uSs/gviz/tq?tqx=out:json';
+
+        const response1 = await fetch(url1);
+        const data1 = await response1.text();
+
+        const json1 = JSON.parse(
+          data1
+            .replace("/*O_o*/", "")
+            .replace("google.visualization.Query.setResponse(", "")
+            .slice(0, -2)
+        );
+
+        const rows1 = json1.table.rows;
+
+        rows1.slice(1).forEach(row => {
+          const cells = row.c || [];
+          const imageUrl = cells[0]?.v || '';
+          const videoUrl = cells[1]?.v || '';
+
+          if (imageUrl) images.push(imageUrl);
+          if (videoUrl) videoUrls.push(videoUrl);
+        });
+
+        console.log('Images:', images);
+        console.log('Videos:', videoUrls);
+
         // Initial review image display
         showImage(currentIndex);
         // Initial review video load
         showVideo(currentVideoIndex);
 
-        // fetch information from google sheets
+        // fetch information from google sheets about laptops
         const url = 'https://docs.google.com/spreadsheets/d/1Ih63Qx1ykKp3BGSQWMd6UjJC1j06xLLGDlPcEjINJUM/gviz/tq?tqx=out:json';
-        //const corsProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
 
         const response = await fetch(url);
         const data = await response.text();
@@ -299,11 +343,6 @@
       window.open(`https://wa.me/96181323037?text=${encodeURIComponent(text)}`, '_blank');
     });
 
-    const images = [
-      'imgs/MST-PF.jpg',
-      'imgs/MST-PF-2.jpg',
-      'imgs/HackerMeme.png'
-    ];
     let currentIndex = 0;
     const carouselImage = document.getElementById('carousel-image');
 
@@ -329,12 +368,6 @@
 
     // Auto transition every 5 seconds
     setInterval(nextImage, 10000);
-
-    const videoUrls = [
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/movie.mp4',
-        // Add your direct video links here
-    ];
 
     let currentVideoIndex = 0;
     const carouselVideo = document.getElementById('carousel-video');
