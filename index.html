@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality Computers</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins&family=Playfair+Display:wght@700&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      color: #2C2C2C;
+    }
+    .btn-primary {
+      background-color: #1F2A44;
+      color: white;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover {
+      background-color: #3A8DFF;
+    }
+    .category-card:hover {
+      border-color: #3A8DFF;
+      cursor: pointer;
+    }
+    .hero-background {
+      background: url(./imgs/hero_section.jfif);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-white">
+
+  <!-- Top Bar -->
+  <div class="sticky top-0 z-50 bg-white border-b text-sm text-center py-2">
+    Free Delivery | Warranty Included | Instant WhatsApp Help
+  </div>
+
+  <!-- Hero Section -->
+  <section class="text-center py-16 px-4 hero-background">
+    <h1 class="text-3xl font-bold text-[#1F2A44] mb-4">Need a laptop without the stress?</h1>
+    <p class="mb-6 text-lg">We test it. We prepare it. We deliver it ready. You relax—we handle the rest.</p>
+    <a href="https://wa.me/96181323037?text=Hi%2C%20I%20want%20to%20see%20what%20laptop%20fits%20me%20best." class="btn-primary">Let’s Find Yours</a>
+  </section>
+
+  <!-- Category Selector -->
+  <section class="py-10 px-4">
+    <div class="text-center text-2xl font-semibold mb-6">Choose your path</div>
+    <div class="grid gap-6 md:grid-cols-3 lg:grid-cols-5">
+      <div class="border p-4 rounded category-card text-center">
+        <p class="font-bold">I’m a Student</p>
+        <a href="https://wa.me/96181323037?text=Hi%2C%20I%27m%20a%20student%2C%20can%20you%20help%20me%20pick%20one%3F" class="btn-primary mt-2 inline-block">Help Me Choose</a>
+      </div>
+      <div class="border p-4 rounded category-card text-center">
+        <p class="font-bold">I Work Remotely</p>
+        <a href="https://wa.me/96181323037?text=Hi%2C%20I%27m%20working%20remotely%2C%20can%20you%20help%20me%20pick%20one%3F" class="btn-primary mt-2 inline-block">Help Me Choose</a>
+      </div>
+      <div class="border p-4 rounded category-card text-center">
+        <p class="font-bold">I’m a Designer or Coder</p>
+        <a href="https://wa.me/96181323037?text=Hi%2C%20I%27m%20a%20designer%2C%20can%20you%20help%20me%20pick%20one%3F" class="btn-primary mt-2 inline-block">Help Me Choose</a>
+      </div>
+      <div class="border p-4 rounded category-card text-center">
+        <p class="font-bold">I Want a Smart Deal</p>
+        <a href="https://wa.me/96181323037?text=Hi%2C%20I%20want%20a%20smart%20deal%2C%20can%20you%20help%3F" class="btn-primary mt-2 inline-block">Help Me Choose</a>
+      </div>
+      <div class="border p-4 rounded category-card text-center">
+        <p class="font-bold">Just Recommend Me One</p>
+        <a href="https://wa.me/96181323037?text=Hi%2C%20just%20recommend%20me%20a%20laptop%2C%20please." class="btn-primary mt-2 inline-block">Help Me Choose</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Voices Section -->
+  <section class="py-10 px-4 bg-gray-50">
+    <div class="text-center text-2xl font-semibold mb-6">What Customers Say After Delivery</div>
+
+    <!-- Outer grid wrapper -->
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+      <!-- WhatsApp Screenshot Carousel -->
+      <div class="relative bg-white p-4 border rounded flex items-center justify-center">
+        <img id="carousel-image" src="" alt="WhatsApp Screenshot"
+            class="rounded shadow-md transition-opacity duration-500 opacity-0 w-full h-64 object-contain" />
+        <button onclick="prevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+          &#8592;
+        </button>
+        <button onclick="nextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+          &#8594;
+        </button>
+      </div>
+
+      <!-- Video Carousel -->
+      <div class="relative bg-white p-4 border rounded flex items-center justify-center">
+        <video id="carousel-video"
+              controls
+              class="rounded shadow-md transition-opacity duration-500 opacity-0 w-full h-64 object-contain"
+              src=""
+              autoplay muted>
+          Your browser does not support the video tag.
+        </video>
+        <button onclick="prevVideo()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+          &#8592;
+        </button>
+        <button onclick="nextVideo()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+          &#8594;
+        </button>
+      </div>
+
+      <!-- Third item placeholder (optional) -->
+      <!-- <div class="bg-white p-4 border rounded flex items-center justify-center text-center text-gray-600">
+        Add another testimonial or leave this as a placeholder.
+      </div> -->
+    </div>
+
+    <!-- Instagram link -->
+    <div class="text-center mt-4">
+      <a href="#" class="text-blue-600 underline">View more reviews on Instagram Highlights</a>
+    </div>
+  </section>
+  <!-- Laptop List Section -->
+  <section class="py-10 px-4">
+    <div class="text-center text-2xl font-semibold mb-6">Our Recommended Laptops</div>
+    <div id="laptop-list" class="grid gap-6 md:grid-cols-3">
+      <!-- Example Card -->
+      <!--<div class="border p-4 rounded">
+        <img src="https://via.placeholder.com/300x200" alt="Laptop" class="mb-2" />
+        <p><strong>Specs:</strong> 16GB RAM, 512GB SSD, i7</p>
+        <p><strong>Price:</strong> $699</p>
+        <a href="https://wa.me/96181323037?text=Hi%2C%20I%20saw%20this%20laptop%20for%20%24700.%20Can%20you%20tell%20me%20more%3F" class="btn-primary mt-2 inline-block">Ask About This One</a>
+      </div>-->
+      <!-- Duplicate more cards as needed -->
+    </div>
+  </section>
+
+  <!-- Laptop Finder Form -->
+  <section class="py-10 px-4 bg-gray-100">
+    <div class="text-center text-2xl font-semibold mb-4">Not Sure What to Choose?</div>
+    <form id="finderForm" class="max-w-xl mx-auto">
+      <input id="budget" type="text" placeholder="What’s your budget?" class="border p-2 w-full mb-2 rounded" />
+      <input id="useFor" type="text" placeholder="What will you use it for?" class="border p-2 w-full mb-4 rounded" />
+      <button type="submit" class="btn-primary w-full">Send to WhatsApp</button>
+    </form>
+  </section>
+
+  <!-- Quality Deals Section -->
+  <section class="py-10 px-4">
+    <div class="text-center text-2xl font-semibold mb-2">Want Access to Our Secret Deals?</div>
+    <p class="text-center max-w-2xl mx-auto mb-4">
+      Join our private WhatsApp list to get early deals on laptops, accessories, and more.
+      Message: “Quality Deals – [Your Name]”
+    </p>
+    <div class="text-center">
+      <a href="https://wa.me/96181323037?text=Quality%20Deals%20%E2%80%93%20Your%20Name" class="btn-primary">Join on WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-10 px-4 bg-gray-100">
+    <div class="text-center text-2xl font-semibold mb-4">We Get These Questions Every Day</div>
+    <div class="max-w-2xl mx-auto">
+      <details class="mb-2">
+        <summary class="font-bold">Is it tested?</summary>
+        <p>Yes. Everything is hard tested before delivery.</p>
+      </details>
+      <details class="mb-2">
+        <summary class="font-bold">Is it clean?</summary>
+        <p>Always. It’s delivered in perfect shape.</p>
+      </details>
+      <details class="mb-2">
+        <summary class="font-bold">Will it suit me?</summary>
+        <p>We only recommend what fits your use.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-12 px-4 bg-gray-50">
+  <div class="text-center text-3xl font-bold mb-10 text-gray-800">How It Works</div>
+  
+  <div class="max-w-3xl mx-auto grid md:grid-cols-4 gap-6 text-center">
+    <div class="flex flex-col items-center p-6 bg-white shadow rounded-lg hover:shadow-md transition">
+      <div class="text-4xl mb-4 text-blue-500">💬</div>
+      <h3 class="font-semibold text-lg mb-1">You Message Us</h3>
+      <p class="text-sm text-gray-600">Start a conversation on WhatsApp and tell us what you need.</p>
+    </div>
+
+    <div class="flex flex-col items-center p-6 bg-white shadow rounded-lg hover:shadow-md transition">
+      <div class="text-4xl mb-4 text-green-500">🤝</div>
+      <h3 class="font-semibold text-lg mb-1">We Help You Choose</h3>
+      <p class="text-sm text-gray-600">We guide you through the best options based on your budget and needs.</p>
+    </div>
+
+    <div class="flex flex-col items-center p-6 bg-white shadow rounded-lg hover:shadow-md transition">
+      <div class="text-4xl mb-4 text-yellow-500">🔧</div>
+      <h3 class="font-semibold text-lg mb-1">We Test the Laptop</h3>
+      <p class="text-sm text-gray-600">Each laptop is checked thoroughly before delivery.</p>
+    </div>
+
+    <div class="flex flex-col items-center p-6 bg-white shadow rounded-lg hover:shadow-md transition">
+      <div class="text-4xl mb-4 text-purple-500">🚚</div>
+      <h3 class="font-semibold text-lg mb-1">We Deliver It</h3>
+      <p class="text-sm text-gray-600">The laptop is delivered safely to your door, ready to use.</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Final Call to Action -->
+  <section class="py-10 px-4 bg-gray-50 text-center">
+    <p class="text-xl mb-4">Let’s find the right laptop for you—no stress, no pressure.</p>
+    <a href="https://wa.me/96181323037?text=Hi%2C%20I%20want%20to%20find%20the%20right%20laptop%20for%20me." class="btn-primary">Let’s Find Yours</a>
+  </section>
+
+  <script>
+    window.onload = async function () {
+    try {
+        // Initial review image display
+        showImage(currentIndex);
+        // Initial review video load
+        showVideo(currentVideoIndex);
+
+        // fetch information from google sheets
+        const url = 'https://docs.google.com/spreadsheets/d/1Ih63Qx1ykKp3BGSQWMd6UjJC1j06xLLGDlPcEjINJUM/gviz/tq?tqx=out:json';
+        //const corsProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+
+        const response = await fetch(url);
+        const data = await response.text();
+        //const raw = data.contents;
+
+        // Clean the Google Sheets wrapper
+        const json = JSON.parse(
+          data
+            .replace("/*O_o*/", "")
+            .replace("google.visualization.Query.setResponse(", "")
+            .slice(0, -2)
+        );
+
+        const rows = json.table.rows;
+        const container = document.getElementById('laptop-list');
+
+        rows.slice(1).forEach(row => {
+          const cells = row.c || [];
+          const image = cells[0]?.v || '';
+          const specs = cells[1]?.v || '';
+          const price = cells[2]?.v || '';
+          const tagText = cells[3]?.v || '';   
+          const tagColor = cells[4]?.v || '';
+
+          const encodedMessage = encodeURIComponent(
+            `Hi, I saw a laptop priced ${price} with those specs: ${specs}. Can you tell me more about it ?`
+          );
+
+          const card = document.createElement('div');
+          card.className = 'relative border p-4 rounded flex flex-col items-center text-center';
+
+          card.innerHTML = `
+            ${tagText ? `
+            <div 
+              class="absolute top-2 right-2 px-4 py-2 text-sm font-extrabold text-white rounded-full border-2" 
+              style="
+                background-color: ${tagColor};
+                font-family: 'Poppins', sans-serif;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                border-color: #fff;
+                letter-spacing: 1px;
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+              "
+            >
+              ${tagText}
+            </div>` : ''}
+
+            <div class="flex items-center gap-6">
+              <img src="${image}" class="w-52 h-48 object-cover rounded-xl shadow-lg border border-gray-200 transition-transform duration-300 hover:scale-105" alt="Laptop" />
+              <div class="max-w-xs text-left">
+                <p class="mb-3 text-lg font-semibold text-gray-800"><span class="font-bold">Specs:</span> ${specs}</p>
+                <p class="text-lg font-semibold text-green-700"><span class="font-bold text-gray-800">Price:</span> ${price}</p>
+              </div>
+            </div>
+            <a href="https://wa.me/96181323037?text=${encodedMessage}" class="btn-primary mt-4 inline-block">Ask About This One</a>
+          `;
+
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Failed to load laptops:', err);
+      }
+
+  }
+
+
+    document.getElementById('finderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const budget = document.getElementById('budget').value;
+      const useFor = document.getElementById('useFor').value;
+      const text = `Hi, my budget is $${budget}, I'll use it for ${useFor}. Can you help?`;
+      window.open(`https://wa.me/96181323037?text=${encodeURIComponent(text)}`, '_blank');
+    });
+
+    const images = [
+      'imgs/MST-PF.jpg',
+      'imgs/MST-PF-2.jpg',
+      'imgs/HackerMeme.png'
+    ];
+    let currentIndex = 0;
+    const carouselImage = document.getElementById('carousel-image');
+
+    function showImage(index) {
+      carouselImage.classList.add('opacity-0');
+      setTimeout(() => {
+        carouselImage.src = images[index];
+        carouselImage.onload = () => {
+          carouselImage.classList.remove('opacity-0');
+        };
+      }, 250);
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Auto transition every 5 seconds
+    setInterval(nextImage, 10000);
+
+    const videoUrls = [
+        'https://www.w3schools.com/html/mov_bbb.mp4',
+        'https://www.w3schools.com/html/movie.mp4',
+        // Add your direct video links here
+    ];
+
+    let currentVideoIndex = 0;
+    const carouselVideo = document.getElementById('carousel-video');
+
+    function showVideo(index) {
+        carouselVideo.classList.add('opacity-0');
+        setTimeout(() => {
+        carouselVideo.src = videoUrls[index];
+        carouselVideo.load(); // Ensure the video updates
+        carouselVideo.onloadeddata = () => {
+            carouselVideo.classList.remove('opacity-0');
+            carouselVideo.play();
+        };
+        }, 250);
+    }
+
+    function nextVideo() {
+        currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
+        showVideo(currentVideoIndex);
+    }
+
+    function prevVideo() {
+        currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
+        showVideo(currentVideoIndex);
+    }
+
+    carouselVideo.addEventListener('ended', () => {
+        nextVideo();
+    });
+
+  </script>
+</body>
+</html>
