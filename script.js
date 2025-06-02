@@ -156,6 +156,8 @@ try {
     const tagText = cells[3]?.v || '';
     const tagColor = cells[4]?.v || '';
 
+    console.log(extractDriveImageUrl(image));
+
     const lines = rawSpecs.trim().split('\n').map(line => line.trim()).filter(Boolean);
     const title = lines.shift(); // First line = title
     const specsListItems = lines.map(item => `<li class="text-sm text-gray-600">${item}</li>`).join('');
@@ -218,9 +220,9 @@ document.getElementById('finderForm').addEventListener('submit', function(e) {
 const extractDriveImageUrl = (originalUrl) => {
   const match = originalUrl.match(/\/d\/(.*?)\//);
   if (match && match[1]) {
-    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    return `https://drive.google.com/thumbnail?id=${match[1]}`;
   }
-  return ""; // fallback image or empty
+  return originalUrl; // fallback image or empty
 };
 
 window.addEventListener('resize', () => {
