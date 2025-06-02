@@ -173,7 +173,7 @@ try {
     const specsListItems = lines.map(item => `<li class="text-sm text-gray-600">${item}</li>`).join('');
 
     const encodedMessage = encodeURIComponent(
-        `Hi, I saw a laptop priced ${price} with those specs: ${rawSpecs}. Can you tell me more about it ?`
+        `Hi, I saw a laptop priced ${price} with those specs:\n${rawSpecs}.\nCan you tell me more about it ?`
     );
 
     const card = document.createElement('div');
