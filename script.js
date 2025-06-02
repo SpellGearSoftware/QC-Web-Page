@@ -3,31 +3,31 @@ const images = [];
 const videoUrls = [];
 
 // Make image Carousel for reviews
-let currentIndex = 0;
-const carouselImage = document.getElementById('carousel-image');
+// let currentIndex = 0;
+// const carouselImage = document.getElementById('carousel-image');
 
-function showImage(index) {
-    carouselImage.classList.add('opacity-0');
-    setTimeout(() => {
-    carouselImage.src = images[index];
-    carouselImage.onload = () => {
-        carouselImage.classList.remove('opacity-0');
-    };
-    }, 250);
-}
+// function showImage(index) {
+//     carouselImage.classList.add('opacity-0');
+//     setTimeout(() => {
+//     carouselImage.src = images[index];
+//     carouselImage.onload = () => {
+//         carouselImage.classList.remove('opacity-0');
+//     };
+//     }, 250);
+// }
 
-function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
-}
+// function nextImage() {
+//     currentIndex = (currentIndex + 1) % images.length;
+//     showImage(currentIndex);
+// }
 
-function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
-}
+// function prevImage() {
+//     currentIndex = (currentIndex - 1 + images.length) % images.length;
+//     showImage(currentIndex);
+// }
 
-// Auto transition every 10 seconds
-setInterval(nextImage, 10000);
+// // Auto transition every 10 seconds
+// setInterval(nextImage, 10000);
 
 // Make Video Carousel for reviews
 let currentVideoIndex = 0;
@@ -138,7 +138,7 @@ try {
     console.log('Videos:', videoUrls);
 
     // Initial review image display
-    showImage(currentIndex);
+    // showImage(currentIndex);
     // Initial review video load
     showVideo(currentVideoIndex);
 
@@ -207,7 +207,7 @@ try {
                 </div>
             </div>
 
-            <a href="https://wa.me/96181323037?text=${encodedMessage}" class="btn-primary mt-4 inline-block">Ask About This One</a>
+            <a href="https://wa.me/96103694058?text=${encodedMessage}" class="btn-primary mt-4 inline-block">Ask About This One</a>
         </div>
     `;
 
@@ -224,7 +224,7 @@ document.getElementById('finderForm').addEventListener('submit', function(e) {
     const budget = document.getElementById('budget').value;
     const useFor = document.getElementById('useFor').value;
     const text = `Hi, my budget is $${budget}, I'll use it for ${useFor}. Can you help?`;
-    window.open(`https://wa.me/96181323037?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/96103694058?text=${encodeURIComponent(text)}`, '_blank');
 });
 
 const extractDriveImageUrl = (originalUrl) => {
