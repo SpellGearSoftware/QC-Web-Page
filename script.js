@@ -29,47 +29,59 @@ const videoUrls = [];
 // // Auto transition every 10 seconds
 // setInterval(nextImage, 10000);
 
-// Make Video Carousel for reviews
-let currentVideoIndex = 0;
-const carouselVideo = document.getElementById('carousel-video');
+// Carousel for Video
 
-function showVideo(index) {
+  let currentVideoIndex = 0;
+  let vimeoPlayer = null;
+
   const carouselVideo = document.getElementById("carousel-video");
   const overlay = document.getElementById("iframe-overlay");
 
-  // Disable interaction during transition
-  overlay.style.pointerEvents = "auto";
-  carouselVideo.classList.add("opacity-0");
+  function setupVimeoPlayer() {
+    if (vimeoPlayer) {
+      vimeoPlayer.unload().then(() => {
+        loadCurrentVideo();
+      });
+    } else {
+      loadCurrentVideo();
+    }
+  }
 
-  setTimeout(() => {
-    carouselVideo.src = videoUrls[index];
+  function loadCurrentVideo() {
+    // Fade out current video
+    overlay.style.pointerEvents = "auto";
+    carouselVideo.classList.add("opacity-0");
 
-    // Wait for iframe to load visually
     setTimeout(() => {
-      carouselVideo.classList.remove("opacity-0");
+      carouselVideo.src = videoUrls[currentVideoIndex];
 
-      // Allow clicks through again after video fades in
+      // Create a new Vimeo player
+      vimeoPlayer = new Vimeo.Player(carouselVideo);
+
+      // Add the 'ended' event listener
+      vimeoPlayer.on('ended', () => {
+        nextVideo();
+      });
+
+      // Fade in after load
       setTimeout(() => {
-        overlay.style.pointerEvents = "none";
-      }, 500); // adjust based on fade time
-    }, 200);
-  }, 250);
-}
+        carouselVideo.classList.remove("opacity-0");
+        setTimeout(() => {
+          overlay.style.pointerEvents = "none";
+        }, 500);
+      }, 300);
+    }, 250);
+  }
 
-
-function nextVideo() {
+  function nextVideo() {
     currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
-    showVideo(currentVideoIndex);
-}
+    setupVimeoPlayer();
+  }
 
-function prevVideo() {
+  function prevVideo() {
     currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
-    showVideo(currentVideoIndex);
-}
-
-carouselVideo.addEventListener('ended', () => {
-    nextVideo();
-});
+    setupVimeoPlayer();
+  }
 
 // Laptop Section Coursel
 let currentLaptopIndex = 0;
@@ -139,8 +151,9 @@ try {
 
     // Initial review image display
     // showImage(currentIndex);
+    
     // Initial review video load
-    showVideo(currentVideoIndex);
+    setupVimeoPlayer();
 
     // Fetch information from google sheets about laptops
     const url = 'https://docs.google.com/spreadsheets/d/1Ih63Qx1ykKp3BGSQWMd6UjJC1j06xLLGDlPcEjINJUM/gviz/tq?tqx=out:json';
