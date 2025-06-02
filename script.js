@@ -183,7 +183,7 @@ try {
             </div>` : ''}
 
             <div class="flex flex-col items-center gap-4 w-full">
-                <img src="${image}" class="w-52 h-48 object-cover rounded-xl shadow-lg border border-gray-200" alt="Laptop" />
+                <img src="${extractDriveImageUrl(image)}" class="w-52 h-48 object-cover rounded-xl shadow-lg border border-gray-200" alt="Laptop" />
                 
                 <div class="text-left w-full px-2">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">${title}</h3>
@@ -214,6 +214,14 @@ document.getElementById('finderForm').addEventListener('submit', function(e) {
     const text = `Hi, my budget is $${budget}, I'll use it for ${useFor}. Can you help?`;
     window.open(`https://wa.me/96181323037?text=${encodeURIComponent(text)}`, '_blank');
 });
+
+const extractDriveImageUrl = (originalUrl) => {
+  const match = originalUrl.match(/\/d\/(.*?)\//);
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  }
+  return ""; // fallback image or empty
+};
 
 window.addEventListener('resize', () => {
     const cardWidth = updateCardWidth();
