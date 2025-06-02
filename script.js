@@ -34,16 +34,28 @@ let currentVideoIndex = 0;
 const carouselVideo = document.getElementById('carousel-video');
 
 function showVideo(index) {
-    carouselVideo.classList.add('opacity-0');
-    setTimeout(() => {
+  const carouselVideo = document.getElementById("carousel-video");
+  const overlay = document.getElementById("iframe-overlay");
+
+  // Disable interaction during transition
+  overlay.style.pointerEvents = "auto";
+  carouselVideo.classList.add("opacity-0");
+
+  setTimeout(() => {
     carouselVideo.src = videoUrls[index];
-    carouselVideo.load(); // Ensure the video updates
-    carouselVideo.onloadeddata = () => {
-        carouselVideo.classList.remove('opacity-0');
-        carouselVideo.play();
-    };
-    }, 250);
+
+    // Wait for iframe to load visually
+    setTimeout(() => {
+      carouselVideo.classList.remove("opacity-0");
+
+      // Allow clicks through again after video fades in
+      setTimeout(() => {
+        overlay.style.pointerEvents = "none";
+      }, 500); // adjust based on fade time
+    }, 200);
+  }, 250);
 }
+
 
 function nextVideo() {
     currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
@@ -118,8 +130,8 @@ try {
         const imageUrl = cells[0]?.v || '';
         const videoUrl = cells[1]?.v || '';
 
-        if (imageUrl) images.push(imageUrl);
-        if (videoUrl) videoUrls.push(videoUrl);
+        if (imageUrl) images.push(extractDriveImageUrl(imageUrl));
+        if (videoUrl) videoUrls.push(convertToDrivePreviewLink(videoUrl));
     });
 
     console.log('Images:', images);
@@ -155,8 +167,6 @@ try {
     const price = cells[2]?.v || '';
     const tagText = cells[3]?.v || '';
     const tagColor = cells[4]?.v || '';
-
-    console.log(extractDriveImageUrl(image));
 
     const lines = rawSpecs.trim().split('\n').map(line => line.trim()).filter(Boolean);
     const title = lines.shift(); // First line = title
@@ -224,6 +234,16 @@ const extractDriveImageUrl = (originalUrl) => {
   }
   return originalUrl; // fallback image or empty
 };
+
+function convertToDrivePreviewLink(driveLink) {
+  const match = driveLink.match(/\/file\/d\/([^/]+)\//);
+  if (match && match[1]) {
+    const fileId = match[1];
+    return `https://drive.google.com/file/d/${fileId}/preview`;
+  }
+  return driveLink; // return null if no valid file ID found
+}
+
 
 window.addEventListener('resize', () => {
     const cardWidth = updateCardWidth();

@@ -110,20 +110,36 @@
 
       <!-- Video Carousel -->
       <div class="relative bg-white p-4 border rounded flex items-center justify-center">
-        <video id="carousel-video"
-              controls
-              class="rounded shadow-md transition-opacity duration-500 opacity-0 w-full h-64 object-contain"
-              src=""
-              autoplay muted>
-          Your browser does not support the video tag.
-        </video>
-        <button onclick="prevVideo()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+  
+        <!-- iframe wrapper and video -->
+        <iframe id="carousel-video"
+                class="rounded shadow-md transition-opacity duration-500 opacity-0 w-full h-64 object-contain"
+                src=""
+                style="z-index: 10;"
+                allow="autoplay"
+                allowfullscreen>
+        </iframe>
+
+        <!-- Transparent overlay to block unwanted iframe touches -->
+        <div id="iframe-overlay"
+            class="absolute inset-0 z-20"
+            style="pointer-events: auto;"></div>
+
+        <!-- Navigation buttons (above overlay) -->
+        <button onclick="prevVideo()" 
+                class="absolute top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200"
+                style="z-index: 50; left: -1rem;">
           &#8592;
         </button>
-        <button onclick="nextVideo()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+
+        <button onclick="nextVideo()" 
+                class="absolute top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200"
+                style="z-index: 50; right: -1rem;">
           &#8594;
         </button>
+
       </div>
+
 
       <!-- Third item placeholder (optional) -->
       <!-- <div class="bg-white p-4 border rounded flex items-center justify-center text-center text-gray-600">
