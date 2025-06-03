@@ -208,7 +208,9 @@ try {
             </div>` : ''}
 
             <div class="flex flex-col items-center gap-4 w-full">
-                <img src="${extractDriveImageUrl(image)}" class="w-52 h-48 object-cover rounded-xl shadow-lg border border-gray-200" alt="Laptop" />
+                <a href="${extractDriveImageUrl(image)}" target="_blank" title="Click to View Full Image">
+                  <img src="${extractDriveImageUrl(image)}" class="w-52 h-48 object-cover rounded-xl shadow-lg border border-gray-200 hover:opacity-90 hover:scale-105 transition duration-300" alt="Laptop" />
+                </a>
                 
                 <div class="text-left w-full px-2">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">${title}</h3>
