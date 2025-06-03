@@ -146,8 +146,8 @@ try {
         if (videoUrl) videoUrls.push(convertToDrivePreviewLink(videoUrl));
     });
 
-    console.log('Images:', images);
-    console.log('Videos:', videoUrls);
+    // console.log('Images:', images);
+    // console.log('Videos:', videoUrls);
 
     // Initial review image display
     // showImage(currentIndex);
@@ -208,7 +208,7 @@ try {
             </div>` : ''}
 
             <div class="flex flex-col items-center gap-4 w-full">
-                <a href="${image}" target="_blank" title="Click to View Full Image">
+                <a href="${extractDriveFullImageUrl(image)}" target="_blank" title="Click to View Full Image">
                   <img src="${extractDriveImageUrl(image)}" class="w-52 h-48 object-cover rounded-xl shadow-lg border border-gray-200 hover:opacity-90 hover:scale-105 transition duration-300" alt="Laptop" />
                 </a>
                 
@@ -246,6 +246,14 @@ const extractDriveImageUrl = (originalUrl) => {
   const match = originalUrl.match(/\/d\/(.*?)\//);
   if (match && match[1]) {
     return `https://drive.google.com/thumbnail?id=${match[1]}`;
+  }
+  return originalUrl; // fallback image or empty
+};
+
+const extractDriveFullImageUrl = (originalUrl) => {
+  const match = originalUrl.match(/\/d\/(.*?)\//);
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
   }
   return originalUrl; // fallback image or empty
 };
